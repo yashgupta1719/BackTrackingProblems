@@ -1,0 +1,43 @@
+CountOfSubsetWithSumEqualToX(Tabulation (bottom up approach) and Memoization Top down approach)
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+
+def subsum(arr,n,s):
+    t=[[-1 for i in range(s+1)] for j in range(n+1)]
+    for i in range(n+1):
+        t[i][0]=1
+    for j in range(1,s+1):
+        t[0][j]=0
+    for i in range(1,n+1):
+        for j in range(1,s+1):
+            if(arr[i-1]>s):
+                t[i][j]=t[i-1][j]
+            elif(j<arr[i-1]):
+                t[i][j]=t[i-1][j]
+            elif(j>=arr[i-1]):
+                t[i][j]=t[i-1][j]+t[i-1][j-arr[i-1]]
+    return t[n][s]
+arr=list(map(int,input().split()))
+s=int(input())
+ans=subsum(arr,len(arr),s)
+print(ans)
+
+t=[[-1 for i in range(1001)] for j in range(1001)]
+def subsum(arr,n,s):
+    if(s==0):
+        return 1
+    if(n==0):
+        return 0
+    if(t[n][s]!=-1):
+        return t[n][s]
+    else:
+        if(arr[n-1]>s):
+            t[n][s]=subsum(arr,n-1,s)
+            return t[n][s]
+        else:
+            t[n][s]=subsum(arr,n-1,s)+subsum(arr,n-1,s-arr[n-1])
+            return t[n][s]
+arr=list(map(int,input().split()))
+s=int(input())
+ans=subsum(arr,len(arr),s)
+print(ans)

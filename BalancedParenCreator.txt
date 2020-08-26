@@ -1,0 +1,18 @@
+def parengen(op,cl,para):
+    if(op==0 and cl==0):
+        print(para)
+        return
+    if(op!=0):
+        addpara=para
+        addpara+='('
+        parengen(op-1,cl,addpara)
+    if(cl>op):
+        addclpara=para
+        addclpara+=')'
+        parengen(op,cl-1,addclpara)
+    return
+n=int(input())
+op=n
+cl=n
+initialparenthesis=""        
+parengen(op,cl,initialparenthesis)

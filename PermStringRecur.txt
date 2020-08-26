@@ -1,0 +1,17 @@
+def swap(arr,a,b):
+    arr=list(arr)
+    arr[a],arr[b]=arr[b],arr[a]
+    return ''.join(arr)
+def perm(string,start,end):
+    if(start==end):
+        print(string)
+    else:
+        for i in range(start,end+1):
+            string1=swap(string,start,i)
+            perm(string1,start+1,end)
+string="ABC"
+start=0
+end=len(string)-1
+perm(string,start,end)
+
+    

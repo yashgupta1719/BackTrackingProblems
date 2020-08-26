@@ -1,0 +1,28 @@
+def knight(visited,row,col,c):
+    if(c==64):
+        for i in range(8):
+            for j in range(8):
+                print(visited[i][j],end=" ")
+            print("")
+        return True // Found the soultion return true
+    else:
+        for i in range(len(rowpath)):
+            rowNew=row+rowpath[i]
+            colNew=col+colpath[i]
+            if(ifvalid(rowNew,colNew,visited)):
+                c=c+1
+                visited[rowNew][colNew]=c
+                if(knight(visited,rowNew,colNew,c)): 
+			return True //checking if found the solution above then instead expanding for other branches and recursing on then we will continue to return true for each other recursive call and not traverse along them as we already found the solution
+                c-=1
+                visited[rowNew][colNew]=-1
+     return False // when this path chosen was wrong and other path needs to be explored
+def ifvalid(rowNew,colNew,visited):
+    if((rowNew>=0 and rowNew<8) and (colNew>=0 and colNew<8) and visited[rowNew][colNew]==-1):
+        return True
+    else:
+        return False
+rowpath=[2,1,-1,-2,-2,-1,1,2]
+colpath=[1,2,2,1,-1,-2,-2,-1]
+visited=[[-1 for i in range(8)] for j in range(8)]
+knight(visited,0,0,1)

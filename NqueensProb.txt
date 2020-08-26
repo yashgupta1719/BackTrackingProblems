@@ -1,0 +1,39 @@
+def Nqueen(board,row,size):
+    if(row==size-1):
+        for i in range(size):
+            for j in range(size):
+                print(board[i][j],end=" ")
+            print("")
+        return True
+    else:
+        for k in range(size):
+            rowNew=row+1
+            if(ifvalid(board,rowNew,k,size)):
+                board[rowNew][k]=True
+                if(Nqueen(board,rowNew,size)):
+                    return True
+                board[rowNew][k]=False
+        return False
+def ifvalid(board,rowNew,col,size):
+    valid=True
+    for i in range(size):
+        if(board[i][col]==True):
+            valid=False
+    i=rowNew
+    j=col
+    while(i>=0 and j>=0):
+        if(board[i][j]):
+            valid=False
+        i-=1
+        j-=1
+    i=rowNew
+    j=col
+    while(i>=0 and j<size):
+        if(board[i][j]):
+            valid=False
+        i-=1
+        j+=1
+    return valid
+size=int(input())
+board=[[False,False,False,False,False],[False,False,False,False,False],[False,False,False,False,False],[False,False,False,False,False],[False,False,False,False,False]]
+Nqueen(board,-1,size)

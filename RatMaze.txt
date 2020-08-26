@@ -1,0 +1,37 @@
+pathrow=[0,0,1,-1]
+pathcol=[1,-1,0,0]
+def findword(board,visited,row,col,c):
+    if(row==3 and col==3):
+        for i in range(4):
+            for j in range(4):
+                print(visited[i][j],end=" ")
+            print("")
+        print("\n")    
+    for k in range(len(pathrow)):
+        rowNew=row+pathrow[k]
+        colNew=col+pathcol[k]
+        if(ifvalid(rowNew,colNew,visited,board)):
+            visited[rowNew][colNew]=c#I was making word permanent but it should be temporarily stored 
+            #in a word so that combination can be compared with the words in the dictionary 
+            findword(board,visited,rowNew,colNew,c+1)
+            visited[rowNew][colNew]=-1
+def ifvalid(rowNew,colNew,visited,board):
+    if((rowNew>=0 and rowNew<4) and (colNew>=0 and colNew<4) and 
+    visited[rowNew][colNew]==-1
+    and board[rowNew][colNew]!=0):
+        return True
+    else:
+        return False
+board=[[1,1,0,1],[0,1,1,1],[0,1,0,1],[0,1,1,1]]
+visited=[[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1]]
+i=0
+j=0
+rowpath=[]
+colpath=[]
+visited[i][j]=0
+findword(board,visited,i,j,1)
+
+        
+        
+
+
